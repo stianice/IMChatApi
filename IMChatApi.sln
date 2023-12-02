@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApi", "ChatApi.csproj", "{3EEDC9D5-716E-48C8-BBDB-4E7D45368E4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApi", "ChatApi.csproj", "{3EEDC9D5-716E-48C8-BBDB-4E7D45368E4E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChatApi", "ChatApi", "{BE656B7D-C4A1-446C-BA0F-4555FAC5E58A}"
 EndProject

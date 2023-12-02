@@ -3,12 +3,15 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+Migrations/
+
 # User-specific files
 *.rsuser
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -183,7 +186,7 @@ publish/
 *.[Pp]ublish.xml
 *.azurePubxml
 # Note: Comment the next line if you want to checkin your web deploy settings,
-# but database connection strings (with potential passwords) will be unencrypted
+# but database connection strings ( potential passwords) will be unencrypted
 *.pubxml
 *.publishproj
 

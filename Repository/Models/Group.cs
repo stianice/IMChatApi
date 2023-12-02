@@ -11,7 +11,7 @@ public class Group
 
     public string GroupName { get; set; } = null!;
 
-    public string Notice { get; set; } = null!;
+    public string Notice { get; set; } = "无公告。。。。。";
 
     public long CreateTime { get; set; }
 

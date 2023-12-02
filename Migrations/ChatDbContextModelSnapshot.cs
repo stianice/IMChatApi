@@ -125,7 +125,7 @@ namespace ChatApi.Migrations
                     b.Property<byte>("Tag")
                         .HasColumnType("tinyint unsigned");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");

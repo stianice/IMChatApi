@@ -1,10 +1,6 @@
-﻿using ChatApi.Repository.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using NLog;
 using NLog.Web;
-using SqlSugar;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("启动中……");
@@ -15,24 +11,13 @@ try
 
     var configuration = builder.Configuration;
 
-  /*  // 基本能力配置
-    builder.SimpleConfigure();
+    //基本配置
+    builder.AddSimpleConfigure();
 
     // API
     builder.Services.AddControllers()
     .AddDataValidation() //模型参数校验
-
-
-    .AddAppResult(options =>
-    {
-        options.ResultFactory = resultException =>
-        {
-            // AppResultException 都返回 200 状态码
-            var objectResult = new ObjectResult(resultException.AppResult);
-            objectResult.StatusCode = StatusCodes.Status200OK;
-            return objectResult;
-        };
-    });
+    .AddAppResult();
 
 
     builder.Services.AddEndpointsApiExplorer();
@@ -42,7 +27,7 @@ try
     // Swagger
     builder.Services.AddSimpleSwagger(options =>
     {
-        options.SwaggerDoc("v1", new OpenApiInfo { Title = "Mall商城接口文档v1", Version = "v1" });
+        options.SwaggerDoc("v1", new OpenApiInfo { Title = "IMchat接口文档v1", Version = "v1" });
     });
 
     // 仓储层
@@ -50,57 +35,50 @@ try
 
 
     // 服务层：自动添加 Service 层以 Service 结尾的服务
-    builder.Services.AddAutoServices("Mall.Services");
+    builder.Services.AddAutoServices();
 
     // JWT 认证
     builder.Services.AddJwtAuthentication();
 
     // 授权
-    builder.Services.AddSimpleAuthorization();
+    //  builder.Services.AddSimpleAuthorization();
 
 
     // 跨域
-    builder.Services.AddSimpleCors();*/
+    builder.Services.AddSimpleCros();
 
 
 
     var app = builder.Build();
 
-    // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
         app.UseSwaggerUI();
     }
 
+    //https
     app.UseHttpsRedirection();
 
-    /* app.UseCors("local");
 
-     app.UseStaticFiles(new StaticFileOptions
-     {
-         FileProvider = new PhysicalFileProvider(
-            Path.Combine(builder.Environment.ContentRootPath, "staticfiles")),
-         RequestPath = "/staticfiles"
-     });
- */
-    var db = new SqlSugarClient(new ConnectionConfig()
-    {
-        ConnectionString = "Server=192.168.0.6;Port=3306;Database=chat;User=root;Password=root;",
-        DbType = DbType.MySql, // 根据实际情况选择数据库类型
-        IsAutoCloseConnection = true
-    });
+    app.UseCors("default");
 
-    db.CodeFirst.InitTables(typeof(User),typeof(Friend2));
+    //app.UseStaticFiles(new StaticFileOptions
+    //{
+    //    FileProvider = new PhysicalFileProvider(
+    //       Path.Combine(builder.Environment.ContentRootPath, "staticfiles")),
+    //    RequestPath = "/staticfiles"
+    //});
 
-    db.MappingTables.Add("User_Friend_Map", "UserId", "FriendId");
 
-    //app.UseAuthorization();
+
+    app.UseAuthentication();
 
     app.UseAuthorization();
 
-    app.MapControllers();
 
+    app.MapControllers();
+    
     app.Run();
 }
 catch (Exception ex)

@@ -11,7 +11,7 @@ namespace ChatApi.Migrations
 {
     [DbContext(typeof(ChatDbContext))]
     [Migration("20231129070407_init")]
-    partial class init
+    internal partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -4,33 +4,32 @@ using ChatApi.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-namespace ChatApi.Repository
+namespace ChatApi.Repository;
+
+public class ChatDbContext:DbContext
 {
-    public class ChatDbContext:DbContext
+    public DbSet<FriendMessage> FriendMessages { get; set; }
+    public DbSet<Group> Groups { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<GroupMessage> GroupMessages { get; set; }
+
+    public ChatDbContext(DbContextOptions<ChatDbContext> options):base(options)
     {
-        public DbSet<FriendMessage> FriendMessages;
-        public DbSet<Group> Groups;
-        public DbSet<User> Users;
-        public DbSet<GroupMessage> GroupMessages;
-
-        public ChatDbContext(DbContextOptions<ChatDbContext> options):base(options)
-        {
             
             
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-
-            base.OnConfiguring(optionsBuilder);
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        }
-
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+
+        base.OnConfiguring(optionsBuilder);
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+            
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
+
 }
